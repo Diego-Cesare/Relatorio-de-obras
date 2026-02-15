@@ -104,11 +104,11 @@ form.addEventListener("submit", async (event) => {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
-  doc.setFont("helvetica", "bold");
+  doc.setFont("arial", "bold");
   doc.setFontSize(18);
   doc.text("Relatório de obra concluida.", 14, 20);
 
-  doc.setFont("helvetica", "normal");
+  doc.setFont("arial", "normal");
   doc.setFontSize(12);
   doc.text(`Bairro: ${bairro}`, 14, 76);
   doc.text(`Rua: ${rua}`, 14, 46);
