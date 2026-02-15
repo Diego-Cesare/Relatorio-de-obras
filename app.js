@@ -95,10 +95,10 @@ form.addEventListener("submit", async (event) => {
   }
 
   const data = new FormData(form);
+  const bairro = data.get("bairro")?.toString().trim() || "";
   const rua = (data.get("rua")?.toString().trim() || "").toUpperCase();
   const complemento = data.get("complemento")?.toString().trim() || "";
   const descricao = data.get("descricao")?.toString().trim() || "";
-  const bairro = data.get("bairro")?.toString().trim() || "";
   const horaRegistro = horaRegistroEl.value;
 
   const { jsPDF } = window.jspdf;
@@ -110,12 +110,23 @@ form.addEventListener("submit", async (event) => {
 
   doc.setFont("arial", "normal");
   doc.setFontSize(12);
-  doc.text(`Bairro: ${bairro}`, 14, 76);
-  doc.text(`Rua: ${rua}`, 14, 46);
-  doc.text(`Complemento: ${complemento}`, 14, 56);
-  doc.text(`Descricao: ${descricao}`, 14, 66);
-  doc.text(`Hora do registro: ${horaRegistro}`, 14, 86);
-  doc.text(`Imagem anexada: ${imagemSelecionada ? "Sim" : "Não"}`, 14, 96);
+
+  let y = 40;
+
+  doc.text(`Bairro: ${bairro}`, 14, y);
+  y += 10;
+
+  doc.text(`Rua: ${rua}`, 14, y);
+  y += 10;
+
+  doc.text(`Complemento: ${complemento}`, 14, y);
+  y += 10;
+
+  doc.text(`Descricao: ${descricao}`, 14, y);
+  y += 10; // pequeno espaço extra antes da imagem
+
+  doc.text(`Imagem anexada: ${imagemSelecionada ? "Sim" : "Não"}`, 14, y);
+  y += 15;
 
   if (imagemSelecionada) {
     try {
@@ -128,7 +139,7 @@ form.addEventListener("submit", async (event) => {
       const renderWidth = imageProps.width * scale;
       const renderHeight = imageProps.height * scale;
 
-      let imageY = 106;
+      let imageY = y;
       if (imageY + renderHeight > 280) {
         doc.addPage();
         imageY = 20;
