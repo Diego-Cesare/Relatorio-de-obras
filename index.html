@@ -9,6 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+      <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/duotone/style.css"
+    />
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 </head>
 
@@ -36,18 +41,18 @@
 
         <label>Adicionar imagem (opcional)</label>
         <div class="media-actions">
-          <label for="fotoArquivo" class="media-button">Selecionar imagem</label>
-          <label for="fotoCamera" class="media-button">Abrir câmera</label>
+          <label for="fotoArquivo" class="media-button"><i class="ph-duotone ph-upload"></i>Enviar imagem</label>
+          <label for="fotoCamera" class="media-button"><i class="ph-duotone ph-camera"></i>Abrir câmera</label>
         </div>
         <input id="fotoArquivo" name="fotoArquivo" class="file-input" type="file" accept="image/*" />
         <input id="fotoCamera" name="fotoCamera" class="file-input" type="file" accept="image/*"
           capture="environment" />
         <img id="previewImagem" class="preview hidden" alt="Pré-visualização da imagem selecionada" />
         <div class="actions">
-          <button type="submit">Gerar Relatório</button>
-          <button type="button" id="btnShare">Compartilhar</button>
-          <input class="clearData" type="reset" value="Limpar" />
+          <button type="submit"><i class="ph-duotone ph-file-arrow-down"></i> Baixar</button>
+          <button type="button" id="btnShare"><i class="ph-duotone ph-share-network"></i>Enviar e Baixar</button>
         </div>
+          <input class="clearData" type="reset" value="Limpar" />
       </form>
       <p id="status" aria-live="polite"></p>
     </section>

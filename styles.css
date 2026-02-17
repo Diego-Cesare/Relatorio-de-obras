@@ -6,8 +6,8 @@
   --card: #252525;
   --text: #e6e1e5;
   --muted: #334155;
-  --accent: #d0bcff;
-  --accent-2: #b69df8;
+  --accent: #2f406e;
+  --accent-2: #173366;
   --border: #0063dd;
   --ok: #8dffb8;
   --error: #ff8080;
@@ -53,6 +53,11 @@ p {
   margin: 0.35rem 0 1rem;
 }
 
+i {
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
 form {
   display: grid;
   gap: 0.55rem;
@@ -70,6 +75,12 @@ button {
   font: inherit;
   border-radius: 12px;
   padding: 0.75rem 0.85rem;
+}
+
+button, .media-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 input,
