@@ -85,6 +85,29 @@ fotoCameraEl.addEventListener("change", (event) => {
 updateClock();
 setInterval(updateClock, 1000);
 
+async function sharePdf(doc) {
+  const pdfBlob = doc.output("blob");
+
+  const pdfFile = new File([pdfBlob], "Relatorio_Obras.pdf", {
+    type: "application/pdf"
+  });
+
+  if (navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
+    try {
+      await navigator.share({
+        title: "Relatório de Obra",
+        text: "Segue o relatório em anexo.",
+        files: [pdfFile]
+      });
+      showStatus("Compartilhado com sucesso.", "ok");
+    } catch (err) {
+      showStatus("Compartilhamento cancelado.", "error");
+    }
+  } else {
+    showStatus("Compartilhamento não suportado neste navegador.", "error");
+  }
+}
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -151,9 +174,11 @@ form.addEventListener("submit", async (event) => {
     }
   }
 
-  doc.save(`Relatorio_Obras_${bairro}.pdf`);
-  if (!statusEl.classList.contains("error")) {
-    showStatus("Relatório PDF gerado e download iniciado.", "ok");
+  if (navigator.canShare) {
+    await sharePdf(doc);
+  } else {
+    doc.save(`Relatorio_Obras_${bairro}.pdf`);
+    showStatus("PDF gerado e download iniciado.", "ok");
   }
 });
 
