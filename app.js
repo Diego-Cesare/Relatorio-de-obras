@@ -1,26 +1,23 @@
-// ===============================
-// ELEMENTOS DO DOM
-// ===============================
-
+// formulario
 const form = document.getElementById("formulario");
+// acessibilidade
 const statusEl = document.getElementById("status");
+// hora
 const horaRegistroEl = document.getElementById("horaRegistro");
+// botão enviar imagem
 const fotoArquivoEl = document.getElementById("fotoArquivo");
+// botão abrir camera
 const fotoCameraEl = document.getElementById("fotoCamera");
+// div de visualização de imagem
 const previewImagemEl = document.getElementById("previewImagem");
+// botão de compartilhar
 const btnShare = document.getElementById("btnShare");
 
-// ===============================
-// ESTADO
-// ===============================
-
+// inicia com div de imagem null
 let imagemSelecionada = null;
 let previewUrl = "";
 
-// ===============================
-// UTILITÁRIOS
-// ===============================
-
+// gerar horario e data
 function formatDateTime(date) {
   return date.toLocaleString("pt-BR", {
     day: "2-digit",
@@ -32,15 +29,18 @@ function formatDateTime(date) {
   });
 }
 
+// função para atuallizar o relogio
 function updateClock() {
   horaRegistroEl.value = formatDateTime(new Date());
 }
 
+// função para exibir aviso
 function showStatus(message, type = "") {
   statusEl.textContent = message;
   statusEl.className = type;
 }
 
+// formatar textos
 function sanitizeFileName(text) {
   return text
     .normalize("NFD")
@@ -49,10 +49,7 @@ function sanitizeFileName(text) {
     .replace(/[^\w\-]/g, "");
 }
 
-// ===============================
-// IMAGEM
-// ===============================
-
+// limpar previa da imagem
 function clearImagePreview() {
   if (previewUrl) {
     URL.revokeObjectURL(previewUrl);
@@ -64,6 +61,7 @@ function clearImagePreview() {
   imagemSelecionada = null;
 }
 
+// selecionar imagem
 function setImage(file, sourceInput) {
   if (!file) return;
 
@@ -88,6 +86,7 @@ function setImage(file, sourceInput) {
   }
 }
 
+// converte arquivo em Base64
 function readFileAsDataURL(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -97,10 +96,7 @@ function readFileAsDataURL(file) {
   });
 }
 
-// ===============================
-// GERAÇÃO DO PDF
-// ===============================
-
+// gerar o pdf
 async function gerarPDF() {
   if (!form.checkValidity()) {
     showStatus("Preencha todos os campos obrigatórios.", "error");
@@ -169,9 +165,7 @@ async function gerarPDF() {
   return { doc, bairro };
 }
 
-// ===============================
-// COMPARTILHAMENTO
-// ===============================
+// compartilhamento
 
 async function sharePdf(doc, bairro) {
   const pdfBlob = doc.output("blob");
@@ -203,9 +197,7 @@ async function sharePdf(doc, bairro) {
   return false;
 }
 
-// ===============================
-// EVENTOS
-// ===============================
+// eventos
 
 fotoArquivoEl.addEventListener("change", (e) => {
   setImage(e.target.files?.[0], fotoArquivoEl);
@@ -249,9 +241,7 @@ form.addEventListener("reset", () => {
   }, 0);
 });
 
-// ===============================
-// INICIALIZAÇÃO
-// ===============================
+// inicia o relogio
 
 updateClock();
 setInterval(updateClock, 1000);
