@@ -88,7 +88,7 @@ setInterval(updateClock, 1000);
 async function sharePdf(doc, bairro) {
   const pdfBlob = doc.output("blob");
 
-  const pdfFile = new File([pdfBlob], "Relatorio_Obras_${bairro}.pdf", {
+  const pdfFile = new File([pdfBlob], `Relatorio_Obras_${bairro}.pdf`, {
     type: "application/pdf"
   });
 
