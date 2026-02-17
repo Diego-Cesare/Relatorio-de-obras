@@ -169,7 +169,7 @@ button:hover {
 .clearData {
   margin-top: 0.3rem;
   border: none;
-  background: linear-gradient(135deg, var(--error), var(--accent-2));
+  background: var(--error);
   color: #fff;
   font-weight: 800;
   cursor: pointer;
