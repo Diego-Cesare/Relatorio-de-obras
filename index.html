@@ -22,37 +22,48 @@
 
       <form id="formulario" novalidate>
 
+        <!-- Entrada do bairro -->
         <label for="bairro">Bairro</label>
         <input id="bairro" name="bairro" type="text" placeholder="Nome do bairro" required />
 
+        <!-- Entrada da rua -->
         <label for="rua">Rua</label>
         <input id="rua" name="rua" type="text" placeholder="Nome da rua" required />
 
+        <!-- Entrada do complemento -->
         <label for="complemento">Complemento</label>
         <input id="complemento" name="complemento" type="text" placeholder="Ex.: Proximo a..." required />
 
+        <!-- Descrição do trabalho -->
         <label for="descricao">Descricao</label>
         <textarea name="descricao" id="descricao"></textarea>
 
+        <!-- Data e hora do registro -->
         <div class="horas" style="display: none;">
           <input id="horaRegistro" name="horaRegistro" type="text" readonly required />
         </div>
 
+        <!-- Adição de imagens -->
         <label>Adicionar imagem (opcional)</label>
         <div class="media-actions">
           <label for="fotoArquivo" class="media-button"><i class="ph-duotone ph-upload"></i>Enviar foto</label>
           <label for="fotoCamera" class="media-button"><i class="ph-duotone ph-camera"></i>Câmera</label>
         </div>
-        <input id="fotoArquivo" name="fotoArquivo" class="file-input" type="file" accept="image/*" />
+        <input id="fotoArquivo" name="fotoArquivo" class="file-input" type="file" accept="image/*" multiple/>
         <input id="fotoCamera" name="fotoCamera" class="file-input" type="file" accept="image/*"
           capture="environment" />
-        <img id="previewImagem" class="preview hidden" alt="Pré-visualização da imagem selecionada" />
+          <img id="previewImagem" class="preview hidden" alt="Pré-visualização da imagem selecionada" />
+        <!-- Botões de ações -->
         <div class="actions">
+          <!-- Baixar PDF -->
           <button type="submit"><i class="ph-duotone ph-file-arrow-down"></i> Baixar</button>
+          <!-- Compartilhar PDF (whatsapp, telegram, email, etc...) -->
           <button type="button" id="btnShare"><i class="ph-duotone ph-share-network"></i>Enviar</button>
         </div>
+        <!-- Botão para limpar formulário -->
         <input class="clearData" type="reset" value="Limpar" />
       </form>
+      <!-- Avisos -->
       <p id="status" aria-live="polite"></p>
     </section>
   </main>
