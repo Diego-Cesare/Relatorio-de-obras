@@ -5,15 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Relatório de obras</title>
+  <link rel="icon" href="img/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-      <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/duotone/style.css"
-    />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/duotone/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 </head>
 
@@ -36,8 +34,9 @@
         <label for="descricao">Descricao</label>
         <textarea name="descricao" id="descricao"></textarea>
 
-        <label for="horaRegistro">Hora do registro (automática)</label>
-        <input id="horaRegistro" name="horaRegistro" type="text" readonly required />
+        <div class="horas" style="display: none;">
+          <input id="horaRegistro" name="horaRegistro" type="text" readonly required />
+        </div>
 
         <label>Adicionar imagem (opcional)</label>
         <div class="media-actions">
@@ -52,7 +51,7 @@
           <button type="submit"><i class="ph-duotone ph-file-arrow-down"></i> Baixar</button>
           <button type="button" id="btnShare"><i class="ph-duotone ph-share-network"></i>Enviar</button>
         </div>
-          <input class="clearData" type="reset" value="Limpar" />
+        <input class="clearData" type="reset" value="Limpar" />
       </form>
       <p id="status" aria-live="polite"></p>
     </section>
