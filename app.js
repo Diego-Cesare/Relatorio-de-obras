@@ -121,7 +121,7 @@ async function gerarPDF() {
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(18);
-  doc.text("Relatório de Obra Concluída", 14, 20);
+  doc.text(`Relatório de Obra Concluída ${bairro}`, 14, 20);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(12);
