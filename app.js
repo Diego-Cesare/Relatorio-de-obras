@@ -85,10 +85,10 @@ fotoCameraEl.addEventListener("change", (event) => {
 updateClock();
 setInterval(updateClock, 1000);
 
-async function sharePdf(doc) {
+async function sharePdf(doc, bairro) {
   const pdfBlob = doc.output("blob");
 
-  const pdfFile = new File([pdfBlob], "Relatorio_Obras.pdf", {
+  const pdfFile = new File([pdfBlob], "Relatorio_Obras_${bairro}.pdf", {
     type: "application/pdf"
   });
 
@@ -100,12 +100,13 @@ async function sharePdf(doc) {
         files: [pdfFile]
       });
       showStatus("Compartilhado com sucesso.", "ok");
+      return true;
     } catch (err) {
       showStatus("Compartilhamento cancelado.", "error");
+      return false
     }
-  } else {
-    showStatus("Compartilhamento não suportado neste navegador.", "error");
   }
+  return false;
 }
 
 form.addEventListener("submit", async (event) => {
@@ -174,9 +175,9 @@ form.addEventListener("submit", async (event) => {
     }
   }
 
-  if (navigator.canShare) {
-    await sharePdf(doc);
-  } else {
+  const shared = await sharePdf(doc, bairro);
+
+  if (!shared) {
     doc.save(`Relatorio_Obras_${bairro}.pdf`);
     showStatus("PDF gerado e download iniciado.", "ok");
   }
