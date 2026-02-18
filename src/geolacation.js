@@ -3,49 +3,59 @@ const locBairro = document.getElementById("bairro");
 const locRua = document.getElementById("rua");
 
 async function obterEndereco() {
-  if (!navigator.geolocation) {
-    throw new Error("Geolocalização não suportada pelo navegador.");
-  }
-
-  function posicaoAtual() {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
-  }
-
-  try {
-    const position = await posicaoAtual();
-    const { latitude, longitude } = position.coords;
-
-    // Requisição para OpenStreetMap (reverse geocoding)
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-    );
-
-    if (!response.ok) {
-      throw new Error("Erro ao buscar endereço.");
+    if (!navigator.geolocation) {
+        throw new Error("Geolocalização não suportada pelo navegador.");
     }
 
-    const data = await response.json();
+    function posicaoAtual() {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+    }
 
-    return {
-      bairro: data.address.suburb || data.address.neighbourhood || "Não encontrado",
-      rua: data.address.road || "Não encontrada"
-    };
+    try {
+        const position = await posicaoAtual();
+        const { latitude, longitude } = position.coords;
 
-  } catch (error) {
-    console.error("Erro:", error);
-    throw error;
-  }
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`,
+            {
+                headers: {
+                    "Accept": "application/json"
+                }
+            }
+        );
+        if (!response.ok) {
+            throw new Error("Erro ao buscar endereço.");
+        }
+
+        const data = await response.json();
+
+        return {
+            bairro: data.address.suburb || data.address.neighbourhood || "Não encontrado. Incira manualmente!",
+            rua: data.address.road || "Não encontrada. Incira manualmente!"
+        };
+
+    } catch (error) {
+        console.error("Erro:", error);
+        throw error;
+    }
 }
 
-localizacao.addEventListener("click", () => {
-obterEndereco()
-  .then(endereco => {
-    locBairro.value = endereco.bairro;
-    locRua.value = endereco.rua;
-  })
-  .catch(err => {
-    console.error("Falha ao obter endereço:", err);
-  });
-})
+localizacao.addEventListener("click", async (e) => {
+    e.preventDefault();
+    localizacao.disabled = true;
+
+    try {
+        const endereco = await obterEndereco();
+        locBairro.value = endereco.bairro;
+        locRua.value = endereco.rua;
+    } catch (err) {
+        locBairro.value = "";
+        locRua.value = "";
+        alert("Erro ao obter localização. Permita acesso à localização.");
+        console.error(err);
+    } finally {
+        localizacao.disabled = false;
+    }
+});
