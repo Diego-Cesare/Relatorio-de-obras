@@ -117,10 +117,15 @@ async function gerarPDF() {
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(18);
+  doc.setTextColor(255, 79, 66);
   doc.text(`Relatório de Obra Concluída ${bairro}`, 14, 20);
+  doc.setDrawColor(21, 21, 21);
+  doc.setLineWidth(1.2);
+  doc.line(14, 23, 150, 23);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(14);
+  doc.setTextColor(0, 0, 0);
 
   let y = 40;
 
