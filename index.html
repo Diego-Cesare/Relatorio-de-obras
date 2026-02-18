@@ -18,7 +18,10 @@
 <body>
   <main class="page">
     <section class="card">
-      <h1>Obra concluida</h1>
+      <div class="loc">
+        <h1>Obra concluida</h1>
+        <button type="button" id="geolocateBtn" class="btn-geoloc"><i class="ph-duotone ph-map-pin"></i> Localização</button>
+      </div>
 
       <form id="formulario" novalidate>
 
@@ -49,19 +52,20 @@
           <label for="fotoArquivo" class="media-button"><i class="ph-duotone ph-upload"></i>Enviar foto</label>
           <label for="fotoCamera" class="media-button"><i class="ph-duotone ph-camera"></i>Câmera</label>
         </div>
-        <input id="fotoArquivo" name="fotoArquivo" class="file-input" type="file" accept="image/*" multiple/>
-        <input id="fotoCamera" name="fotoCamera" class="file-input" type="file" accept="image/*"
-          capture="environment" />
+        <input id="fotoArquivo" name="fotoArquivo" class="file-input" type="file" accept="image/*" multiple />
+        <div class="open-cam">
+          <input id="fotoCamera" name="fotoCamera" class="file-input" type="file" accept="image/*"
+            capture="environment" />
           <img id="previewImagem" class="preview hidden" alt="Pré-visualização da imagem selecionada" />
-        <!-- Botões de ações -->
-        <div class="actions">
-          <!-- Baixar PDF -->
-          <button type="submit"><i class="ph-duotone ph-file-arrow-down"></i> Baixar</button>
-          <!-- Compartilhar PDF (whatsapp, telegram, email, etc...) -->
-          <button type="button" id="btnShare"><i class="ph-duotone ph-share-network"></i>Enviar</button>
-        </div>
-        <!-- Botão para limpar formulário -->
-        <input class="clearData" type="reset" value="Limpar" />
+          <!-- Botões de ações -->
+          <div class="actions">
+            <!-- Baixar PDF -->
+            <button type="submit"><i class="ph-duotone ph-file-arrow-down"></i> Baixar</button>
+            <!-- Compartilhar PDF (whatsapp, telegram, email, etc...) -->
+            <button type="button" id="btnShare"><i class="ph-duotone ph-share-network"></i>Enviar</button>
+          </div>
+          <!-- Botão para limpar formulário -->
+          <input class="clearData" type="reset" value="Limpar" />
       </form>
       <!-- Avisos -->
       <p id="status" aria-live="polite"></p>
