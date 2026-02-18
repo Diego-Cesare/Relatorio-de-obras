@@ -23,6 +23,13 @@ let y = 40;
 let imagemSelecionada = null;
 let previewUrl = "";
 
+function fecharStatus(e) {
+  e.style.display = "block";
+  setTimeout(() => {
+    e.style.display = "none";
+  }, 4000)
+};
+
 // gerar horario e data
 function formatDateTime(date) {
   return date.toLocaleString("pt-BR", {
@@ -44,6 +51,7 @@ function updateClock() {
 function showStatus(message, type = "") {
   statusEl.textContent = message;
   statusEl.className = type;
+  fecharStatus(statusEl);
 }
 
 // formatar textos

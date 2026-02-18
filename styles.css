@@ -18,6 +18,7 @@
 }
 
 body {
+  position: relative;
   margin: 0;
   min-height: 100dvh;
   font-family: "Ubuntu", sans-serif;
@@ -50,6 +51,16 @@ h1 {
 p {
   color: var(--muted);
   margin: 0.35rem 0 1rem;
+  background-color: var(--card);
+  padding: 10px;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  width: 90%;
+  transform: translateX(-50%);
+  text-align: center;
+  border-radius: 20px;
+  display: none;
 }
 
 i {
@@ -112,6 +123,11 @@ textarea {
   color: var(--text);
   font-size: 0.90rem;
   margin-bottom: 1.3rem;
+}
+
+textarea {
+  resize: vertical;
+  height: 100px;
 }
 
 input:focus,
@@ -196,6 +212,7 @@ button:hover {
   color: #fff;
   font-weight: 800;
   cursor: pointer;
+  border-radius: 10px;
   transition: transform 0.15s ease, filter 0.15s ease;
 }
 
@@ -211,6 +228,24 @@ button:hover {
 
 #status.error {
   color: var(--error);
+}
+
+.ph-device-mobile-camera {
+  animation: anime-camera 5s ease-in-out infinite;
+}
+
+@keyframes anime-camera {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  50%{
+    transform: rotateZ(90deg) scale(1.2);
+    color: tomato;
+    border-right: solid 1px tomato;
+  }
+  100%{
+    transform: rotateZ(0deg);
+  }
 }
 
 @keyframes rise {

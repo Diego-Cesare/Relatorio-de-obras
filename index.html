@@ -20,11 +20,12 @@
     <section class="card">
       <div class="loc">
         <h1>Obra concluida</h1>
-        <button type="button" id="geolocateBtn" class="btn-geoloc"><i class="ph-duotone ph-map-pin"></i> Localização</button>
+        <button type="button" id="geolocateBtn" class="btn-geoloc"><i class="ph-duotone ph-map-pin"></i>
+          Localização</button>
       </div>
-
+      <!-- Avisos -->
+      <p id="status" aria-live="polite"></p>
       <form id="formulario" novalidate>
-
         <!-- Entrada do bairro -->
         <label for="bairro">Bairro</label>
         <input id="bairro" name="bairro" type="text" placeholder="Nome do bairro" required />
@@ -50,7 +51,7 @@
         <label>Adicionar imagem (opcional)</label>
         <div class="media-actions">
           <label for="fotoArquivo" class="media-button"><i class="ph-duotone ph-upload"></i>Enviar foto</label>
-          <label for="fotoCamera" class="media-button"><i class="ph-duotone ph-camera"></i>Câmera</label>
+          <label for="fotoCamera" class="media-button"><i class="ph-duotone ph-device-mobile-camera"></i>Câmera</label>
         </div>
         <input id="fotoArquivo" name="fotoArquivo" class="file-input" type="file" accept="image/*" multiple />
         <div class="open-cam">
@@ -67,8 +68,6 @@
           <!-- Botão para limpar formulário -->
           <input class="clearData" type="reset" value="Limpar" />
       </form>
-      <!-- Avisos -->
-      <p id="status" aria-live="polite"></p>
     </section>
   </main>
 
