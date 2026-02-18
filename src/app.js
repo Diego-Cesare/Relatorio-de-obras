@@ -13,6 +13,12 @@ const previewImagemEl = document.getElementById("previewImagem");
 // botão de compartilhar
 const btnShare = document.getElementById("btnShare");
 
+// configuraçoes gerais
+const tituloFont = 18;
+const textoFont = 14;
+// espassamento das linhas do texto
+let y = 40;
+
 // inicia com div de imagem null
 let imagemSelecionada = null;
 let previewUrl = "";
@@ -115,24 +121,32 @@ async function gerarPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
+  // titulo do PDF
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(18);
+  doc.setFontSize(tituloFont);
   doc.setTextColor(255, 79, 66);
   doc.text(`Relatório de Obra Concluída ${bairro}`, 14, 20);
   doc.setDrawColor(21, 21, 21);
   doc.setLineWidth(1.2);
   doc.line(14, 23, 150, 23);
 
+  // texto do PDF
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(14);
+  doc.setFontSize(textoFont);
   doc.setTextColor(0, 0, 0);
-
-  let y = 40;
 
   doc.text(`Bairro: ${bairro}`, 14, y); y += 10;
   doc.text(`Rua: ${rua}`, 14, y); y += 10;
   doc.text(`Complemento: ${complemento}`, 14, y); y += 10;
-  doc.text(`Descrição: ${descricao}`, 14, y); y += 10;
+
+  // conta os caracters da entrada da descrição
+  // para somar com y e nao sobrepor a linha seguinte
+  const descNum = document.getElementById("descricao").value;
+  const descLinNum = doc.splitTextToSize(descNum, 180);
+  let numLin = descLinNum.length;
+  let quebraDeLinha = numLin * (doc.getLineHeight() * 0.352778);
+  doc.text(`Descrição: ${descricao}`, 14, y); y += quebraDeLinha + 5;
+
   doc.text(`Hora do Registro: ${horaRegistro}`, 14, y); y += 10;
 
   doc.text(`Imagem anexada: ${imagemSelecionada ? "Sim" : "Não"}`, 14, y);
@@ -171,7 +185,6 @@ async function gerarPDF() {
 }
 
 // compartilhamento
-
 async function sharePdf(doc, bairro) {
   const pdfBlob = doc.output("blob");
   const safeName = sanitizeFileName(bairro);
